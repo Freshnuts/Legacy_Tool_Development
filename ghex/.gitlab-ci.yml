@@ -1,0 +1,18 @@
+include:
+  - project: 'gnome/citemplates'
+    file: 'flatpak/flatpak_ci_initiative.yml'
+
+flatpak:
+    variables:
+        MANIFEST_PATH: "org.gnome.GHex.Devel.json"
+        FLATPAK_MODULE: "ghex"
+        APP_ID: "org.gnome.GHex.Devel"
+        RUNTIME_REPO: "https://nightly.gnome.org/gnome-nightly.flatpakrepo"
+        BUNDLE: "ghex-dev.flatpak"
+        BRANCH: "master"
+    extends: .flatpak
+
+nightly:
+    extends: '.publish_nightly'
+    needs: ['flatpak']
+    dependencies: ['flatpak']
